@@ -53,7 +53,8 @@ def publishing_data() -> dict[str, str]:
     text = DATA.read_text(encoding="utf-8")
     found = {}
     for field, label in FIELDS.items():
-        m = re.search(re.escape(label) + r"[^\n]*(?:\n[ \t]+[^\n]*)*?:[ \t]*([^\n]*)", text)
+        # The label's own colon, the first after it: a value may hold colons too (https://…).
+        m = re.search(re.escape(label) + r"[^\n:]*(?:\n[ \t]+[^\n:]*)*:[ \t]*([^\n]*)", text)
         value = m.group(1).strip() if m else ""
         if value:
             found[field] = value
@@ -158,6 +159,11 @@ HOME = """
 <p class="links"><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy Policy</a>
 <a href="/meridiem/terms/">Terms of Use</a></p>
 </div>
+<div class="card">
+<h2>syncThesis.IO</h2>
+<p>Breathing therapy and sleep studies, read together with the clinicians who follow them. By invitation.</p>
+<p class="links"><a href="/syncthesis/privacy/">Privacy Policy</a></p>
+</div>
 <p>Contact: <a href="mailto:info@502ds.dev">info@502ds.dev</a></p>
 """
 
@@ -196,7 +202,8 @@ def main() -> int:
     for path, src in PAGES.items():
         md = public_text(src.read_text(encoding="utf-8"))
         for field, value in data.items():
-            md = md.replace(field, value)
+            # A web address goes in as a link, not as text to copy.
+            md = md.replace(field, f"<{value}>" if value.startswith("http") else value)
         left = gaps(md)
         if left:
             missing[path] = left
