@@ -36,6 +36,7 @@ PAGES = {
     "meridiem/privacy": REPOS / "Meridiem/docs/appstore/privacy-policy.md",
     "meridiem/support": REPOS / "Meridiem/docs/appstore/support.md",
     "meridiem/terms": REPOS / "Meridiem/docs/appstore/terms-of-use.md",
+    "syncthesis/privacy": REPOS / "syncThesis/docs/legal/privacy-policy.md",
 }
 
 # A bracketed field, and the label of the line in the publishing data that fills it.
