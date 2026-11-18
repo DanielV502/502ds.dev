@@ -9,4 +9,4 @@ outside every repository, and writes static pages to `docs/`.
     python build.py            # for publishing; stops while a field is still empty
     python build.py --draft    # to review, gaps visible, kept out of search engines
 
-`docs/` is built for publishing only, then committed and served as it is.
+`docs/` is ignored so a draft build is never committed; a build for publishing is added with `git add -f docs`.
