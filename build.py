@@ -153,7 +153,7 @@ HOME = """
 <p class="lede">Apps for the night and the morning: sleep, breathing and therapy, read against your own history.</p>
 <div class="card">
 <h2><a href="/meridiem/">Meridiem</a></h2>
-<p>Your nights. Wake gently. — For iPhone and Apple Watch.</p>
+<p>Days and nights. A quiet wake. — For iPhone and Apple Watch.</p>
 <p class="links"><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy Policy</a>
 <a href="/meridiem/terms/">Terms of Use</a></p>
 </div>
@@ -162,7 +162,7 @@ HOME = """
 
 MERIDIEM = """
 <h1>Meridiem</h1>
-<p class="lede">Your nights. Wake gently.</p>
+<p class="lede">Days and nights. A quiet wake.</p>
 <p>Meridiem reads the sleep and heart data your Apple Watch already records, and turns it into something you can act
 on — measured against your own nights, not against other people.</p>
 <ul>
@@ -217,7 +217,7 @@ def main() -> int:
         name = title.group(1).strip() if title else path
         write(path, page(name, body, description=f"{name} — 502 Design Studio", draft=draft and path in missing))
     write("", page("502 Design Studio", HOME, description="Apps for the night and the morning.", draft=False))
-    write("meridiem", page("Meridiem", MERIDIEM, description="Meridiem — Your nights. Wake gently.", draft=False))
+    write("meridiem", page("Meridiem", MERIDIEM, description="Meridiem — Days and nights. A quiet wake.", draft=False))
     (OUT / "404.html").write_text(page("Not found", '<h1>Not found</h1><p><a href="/">502ds.dev</a></p>',
                                        description="Not found", draft=False), encoding="utf-8")
     (OUT / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
