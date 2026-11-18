@@ -9,10 +9,11 @@ is the policy published. On the way it drops what is not for the public:
 - what is held for a later release (a blockquote that opens with **Held**).
 
 Fields still in brackets (``[legal name]``) are filled from the publishing data kept outside every
-repository (~/Code/Repositories/Documentation). A page with a field still empty is not built for
-publishing: ``--draft`` builds it anyway, marked as a draft and kept out of search engines.
+repository (~/Code/Repositories/Documentation). A page with a field still empty is left out of a build
+for publishing — the rest is published without it; ``--draft`` builds it anyway, marked as a draft and kept
+out of search engines.
 
-    python build.py            # build docs/ for publishing; fails while a field is empty
+    python build.py            # build docs/ for publishing; pages with an empty field are left out
     python build.py --draft    # build docs/ with the gaps visible, to review
 """
 from __future__ import annotations
@@ -200,14 +201,17 @@ def main() -> int:
             missing[path] = left
         built[path] = md
 
-    if missing and not draft:
-        print("✗ not built for publishing — fields still empty:")
+    if missing:
+        print(("· built as drafts" if draft else "· left out until filled") + " — fields still empty:")
         for path, left in missing.items():
             print(f"  /{path}: {', '.join(left)}")
-        print(f"  fill them in {DATA}, or build with --draft to review")
-        return 1
+        print(f"  fill them in {DATA}")
 
+    import shutil
+    shutil.rmtree(OUT, ignore_errors=True)   # a page left out must not survive from an earlier build
     for path, md in built.items():
+        if path in missing and not draft:
+            continue
         body = markdown.markdown(md, extensions=["tables"])
         title = re.search(r"^#\s+(.+)$", md, flags=re.M)
         name = title.group(1).strip() if title else path
@@ -218,8 +222,9 @@ def main() -> int:
                                        description="Not found", draft=False), encoding="utf-8")
     (OUT / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
-    state = f"draft — {sum(len(v) for v in missing.values())} field(s) still empty" if missing else "ready to publish"
-    print(f"✓ built {len(PAGES) + 2} pages in {OUT} · {state}")
+    count = len(PAGES) + 2 - (0 if draft else len(missing))
+    state = ("draft" if draft else "for publishing") + (f" · {len(missing)} page(s) waiting on a field" if missing else "")
+    print(f"✓ built {count} pages in {OUT} · {state}")
     return 0
 
 
