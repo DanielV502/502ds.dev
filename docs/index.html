@@ -2,68 +2,127 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>502 Design Studio</title>
 <meta name="description" content="Apps for the night and the morning.">
 
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#F4FCFE;--card:#FFFFFF;--ink:#1A1A2E;--muted:#5F5F71;--faint:#71718A;--accent:#12B5C2;--accent-ink:#0A7E8A;
---soft:#E1F6F8;--line:#D5ECEF}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C3242;--card:#11313C;--ink:#DCEEF1;
---muted:#8FB6BE;--faint:#799BA3;--accent:#5BD3DE;--accent-ink:#5BD3DE;--soft:#1B4450;--line:#1F4A56}}
-:root[data-theme="dark"]{--bg:#0C3242;--card:#11313C;--ink:#DCEEF1;--muted:#8FB6BE;--faint:#799BA3;--accent:#5BD3DE;
---accent-ink:#5BD3DE;--soft:#1B4450;--line:#1F4A56}
+:root{--bg:#F4FCFE;--card:#FFFFFF;--ink:#1A1A2E;--muted:#5F5F71;--faint:#71718A;--soft:#E1F6F8;--line:#D5ECEF;
+--accent:#12B5C2;--accent-ink:#0A7E8A;--blue:#286193;--turq:#3E9487;--sun:#F6A531;--glow:rgba(18,181,194,.28);
+--ground:radial-gradient(1000px 560px at 88% -6%,rgba(18,181,194,.10),transparent 62%),
+radial-gradient(800px 500px at 8% 4%,rgba(246,165,49,.09),transparent 60%),
+radial-gradient(900px 600px at 50% 105%,rgba(40,97,147,.06),transparent 60%);
+--surface:var(--card);--lift:0 1px 2px rgba(26,26,46,.05),0 12px 28px -18px rgba(10,60,80,.28);
+--press:0 6px 16px -8px rgba(18,181,194,.55);color-scheme:light}
+body[data-ground="night"]{--bg:#0C3242;--card:#11313C;--ink:#DCEEF1;--muted:#8FB6BE;--faint:#799BA3;--soft:#1B4450;
+--line:#1F4A56;--accent:#5BD3DE;--accent-ink:#5BD3DE;--blue:#598BBA;--turq:#59B4A6;--glow:rgba(91,211,222,.25);
+--ground:radial-gradient(1100px 620px at 85% -8%,rgba(91,211,222,.16),transparent 62%),
+radial-gradient(900px 560px at -5% 38%,rgba(89,139,186,.20),transparent 60%),
+radial-gradient(800px 500px at 60% 100%,rgba(246,165,49,.07),transparent 60%),
+linear-gradient(180deg,#0E3747 0%,#0A2834 55%,#071E28 100%);
+--surface:linear-gradient(180deg,#15404D 0%,#0F2F3A 100%);
+--lift:0 1px 0 rgba(255,255,255,.06) inset,0 18px 40px -20px rgba(0,0,0,.65);
+--press:0 8px 22px -8px rgba(91,211,222,.55);color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",
-"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-main{max-width:720px;margin:0 auto;padding:32px 16px 64px}
-header.site{max-width:720px;margin:0 auto;padding:20px 16px 0;display:flex;gap:12px;align-items:baseline;
-justify-content:space-between;flex-wrap:wrap}
-header.site a{color:var(--muted);text-decoration:none;font-size:14px}
-header.site a.brand{color:var(--ink);font-weight:600;font-size:15px}
-nav a+a{margin-left:16px}
-h1{font-size:30px;line-height:1.2;margin:8px 0 8px;letter-spacing:-.01em}
-h2{font-size:20px;margin:36px 0 8px}
-h3{font-size:17px;margin:24px 0 6px}
-p,li{color:var(--ink)}
+body{margin:0;background:var(--bg);background-image:var(--ground);background-attachment:fixed;color:var(--ink);
+font:400 16px/1.65 "Rubik",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transition:background .6s,color .6s;
+font-variant-numeric:tabular-nums}
 a{color:var(--accent-ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));
+padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{position:sticky;top:0;z-index:9;background:color-mix(in srgb,var(--bg) 82%,transparent);
+backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
+.brand{font:600 18px "Rubik",system-ui,sans-serif;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--sun);box-shadow:0 0 12px var(--sun)}
+.bar nav{display:flex;gap:18px;margin-left:auto;font-size:15px}
+.bar nav a{color:var(--muted);text-decoration:none}
+.bar nav a:hover{color:var(--ink)}
+.ground{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface);box-shadow:var(--lift)}
+.ground button{font:500 13px "Rubik",system-ui,sans-serif;border:0;background:none;color:var(--muted);padding:5px 11px;
+border-radius:999px;cursor:pointer}
+.ground button[aria-pressed="true"]{background:var(--accent);color:var(--card);box-shadow:var(--press)}
+@media (max-width:640px){.bar nav{display:none}.ground{margin-left:auto}}
+main{padding-block:32px 56px}
+.doc{max-width:780px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:24px;
+box-shadow:var(--lift);padding:28px clamp(18px,4vw,40px)}
+h1,h2,h3{font-family:"Rubik",system-ui,sans-serif;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(30px,4.6vw,40px);line-height:1.12;margin:4px 0 12px;font-weight:600}
+h2{font-size:21px;margin:34px 0 8px;font-weight:600}
+h3{font-size:17px;margin:24px 0 6px;font-weight:600}
+p,li{color:var(--ink)}
 strong{font-weight:600}
 table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px;display:block;overflow-x:auto}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{color:var(--muted);font-weight:600}
-blockquote{margin:16px 0;padding:12px 16px;background:var(--soft);border-radius:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px;margin:16px 0}
-.card h2{margin-top:0}
-.lede{color:var(--muted);font-size:18px;margin:0 0 24px}
-.links a{display:inline-block;margin:4px 16px 4px 0}
+blockquote{margin:16px 0;padding:12px 16px;background:var(--soft);border-radius:14px}
 .draft{background:#FFF1C9;color:#5A4500;border-radius:12px;padding:10px 14px;font-size:14px;margin-bottom:16px}
-footer{max-width:720px;margin:0 auto;padding:0 16px 40px;color:var(--faint);font-size:13px}
+.lede{color:var(--muted);font-size:19px;max-width:34em;margin:0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin:0}
+.hero{display:grid;gap:14px;padding-block:24px 36px}
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.app{background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:var(--lift);padding:24px;
+display:flex;flex-direction:column;gap:12px;min-width:0}
+.app.main{border:2px solid var(--accent);box-shadow:var(--lift),0 0 40px -14px var(--glow)}
+.app h2{margin:0}
+.app h2 a{color:var(--ink);text-decoration:none}
+.app img{width:120px;height:120px;object-fit:contain;align-self:flex-start}
+.app p{margin:0;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:auto}
+.go{display:inline-flex;align-self:flex-start;background:var(--accent);color:var(--card);text-decoration:none;font-weight:600;
+border-radius:12px;padding:9px 16px;box-shadow:var(--press)}
+@media (max-width:760px){.apps{grid-template-columns:1fr}}
+footer .wrap{padding-block:24px 40px;border-top:1px solid var(--line);color:var(--faint);font-size:14px;display:flex;
+flex-wrap:wrap;gap:10px 22px}
+footer a{color:var(--muted)}
 </style>
 </head>
 <body>
-<header class="site"><a class="brand" href="/">502 Design Studio</a>
-<nav><a href="/meridiem/">Meridiem</a><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy</a></nav>
-</header>
-<main>
+<header class="bar"><div class="wrap">
+<a class="brand" href="/"><i aria-hidden="true"></i>502 Design Studio</a>
+<nav aria-label="Site"><a href="/meridiem/">Meridiem</a><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy</a></nav>
+<div class="ground" role="group" aria-label="Page ground"><button id="g-day" type="button" aria-pressed="true">Day</button><button id="g-night" type="button" aria-pressed="false">Night</button></div>
+</div></header>
+<main><div class="wrap">
 
-
-<h1>502 Design Studio</h1>
-<p class="lede">Apps for the night and the morning: sleep, breathing and therapy, read against your own history.</p>
-<div class="card">
+<section class="hero">
+<p class="eyebrow">502 Design Studio</p>
+<h1>Apps for the night and the morning.</h1>
+<p class="lede">Sleep, breathing and therapy, read against your own history.</p>
+</section>
+<div class="apps">
+<article class="app main">
+<img src="/meridiem/img/wordmark.png" alt="The Meridiem mark">
 <h2><a href="/meridiem/">Meridiem</a></h2>
-<p>Days and nights. A quiet wake. — For iPhone and Apple Watch.</p>
-<p class="links"><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy Policy</a>
-<a href="/meridiem/terms/">Terms of Use</a></p>
-</div>
-<div class="card">
+<p>Days and nights. A quiet wake. Your sleep, heart and PAP therapy, read against your own nights, and an alarm that
+wakes you, not the room. For iPhone and Apple Watch.</p>
+<a class="go" href="/meridiem/">See Meridiem</a>
+<p class="links"><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy Policy</a><a href="/meridiem/terms/">Terms of Use</a></p>
+</article>
+<article class="app">
 <h2>syncThesis.IO</h2>
 <p>Breathing therapy and sleep studies, read together with the clinicians who follow them. By invitation.</p>
 <p class="links"><a href="/syncthesis/privacy/">Privacy Policy</a><a href="/syncthesis/terms/">Terms of Use</a></p>
+</article>
 </div>
-<p>Contact: <a href="mailto:info@502ds.dev">info@502ds.dev</a></p>
 
-</main>
-<footer>© 2025–2026 502 Design Studio · <a href="mailto:info@502ds.dev">info@502ds.dev</a></footer>
+</div></main>
+<footer><div class="wrap"><span>© 2025–2026 502 Design Studio</span><span>info@502ds.dev</span></div></footer>
+<script>
+(() => {
+  const set = (g) => {
+    document.body.dataset.ground = g;
+    document.getElementById("g-day").setAttribute("aria-pressed", String(g === "day"));
+    document.getElementById("g-night").setAttribute("aria-pressed", String(g === "night"));
+    try { localStorage.setItem("meridiem.ground", g); } catch (e) {}
+  };
+  document.getElementById("g-day").addEventListener("click", () => set("day"));
+  document.getElementById("g-night").addEventListener("click", () => set("night"));
+  try { if (localStorage.getItem("meridiem.ground") === "night") set("night"); } catch (e) {}
+})();
+</script>
 </body>
 </html>
