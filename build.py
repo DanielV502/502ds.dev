@@ -37,6 +37,7 @@ PAGES = {
     "meridiem/support": REPOS / "Meridiem/docs/appstore/support.md",
     "meridiem/terms": REPOS / "Meridiem/docs/appstore/terms-of-use.md",
     "syncthesis/privacy": REPOS / "syncThesis/docs/legal/privacy-policy.md",
+    "syncthesis/terms": REPOS / "syncThesis/docs/legal/terms-of-use.md",
 }
 
 # A bracketed field, and the label of the line in the publishing data that fills it.
@@ -162,7 +163,7 @@ HOME = """
 <div class="card">
 <h2>syncThesis.IO</h2>
 <p>Breathing therapy and sleep studies, read together with the clinicians who follow them. By invitation.</p>
-<p class="links"><a href="/syncthesis/privacy/">Privacy Policy</a></p>
+<p class="links"><a href="/syncthesis/privacy/">Privacy Policy</a><a href="/syncthesis/terms/">Terms of Use</a></p>
 </div>
 <p>Contact: <a href="mailto:info@502ds.dev">info@502ds.dev</a></p>
 """
