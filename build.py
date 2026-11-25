@@ -168,24 +168,27 @@ HOME = """
 <p>Contact: <a href="mailto:info@502ds.dev">info@502ds.dev</a></p>
 """
 
-MERIDIEM = """
-<h1>Meridiem</h1>
-<p class="lede">Days and nights. A quiet wake.</p>
-<p>Meridiem reads the sleep and heart data your Apple Watch already records, and turns it into something you can act
-on — measured against your own nights, not against other people.</p>
-<ul>
-<li><strong>Today</strong> — one score for your nights, and the four signals of the night against your usual.</li>
-<li><strong>Sleep</strong> — one night in detail, scored in five parts against your own history.</li>
-<li><strong>Alar-ME</strong> — an alarm that starts quiet, rises slowly and stops once you walk; or a silent tap on
-your wrist.</li>
-<li><strong>Breathe</strong> — guided breathing toward six breaths a minute, with your heart measured on the watch.</li>
-<li><strong>Recovery</strong> and <strong>Move</strong> — heart rate variability and steps, against your usual.</li>
-</ul>
-<p><strong>Private by design.</strong> No account and no analytics. Nothing leaves your devices unless you connect a
-service yourself.</p>
-<p>Meridiem is for general wellness. It does not diagnose, treat or prevent any condition.</p>
-<p class="links"><a href="/meridiem/support/">Support</a><a href="/meridiem/privacy/">Privacy Policy</a>
-<a href="/meridiem/terms/">Terms of Use</a></p>
+# **Meridiem's landing page** (`Meridiem` M-109 Inc 3): written as one page of its own (`landing/meridiem.html`, the
+# page's head and body without the document's shell) with its images beside it (`landing/img/`), and wrapped here.
+LANDING = ROOT / "landing"
+
+
+def landing(name: str) -> str:
+    """The landing page as a whole document: what comes before its closing </style> is the head, the rest the body."""
+    src = (LANDING / f"{name}.html").read_text(encoding="utf-8")
+    src = re.sub(r'<meta name="claude:[^"]*"[^>]*>\n?', "", src)   # the preview's own hint, not the site's
+    cut = src.index("</style>") + len("</style>")
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{src[:cut]}
+</head>
+<body>
+{src[cut:].strip()}
+</body>
+</html>
 """
 
 
@@ -226,7 +229,8 @@ def main() -> int:
         name = title.group(1).strip() if title else path
         write(path, page(name, body, description=f"{name} — 502 Design Studio", draft=draft and path in missing))
     write("", page("502 Design Studio", HOME, description="Apps for the night and the morning.", draft=False))
-    write("meridiem", page("Meridiem", MERIDIEM, description="Meridiem — Days and nights. A quiet wake.", draft=False))
+    write("meridiem", landing("meridiem"))
+    shutil.copytree(LANDING / "img", OUT / "meridiem" / "img")
     (OUT / "404.html").write_text(page("Not found", '<h1>Not found</h1><p><a href="/">502ds.dev</a></p>',
                                        description="Not found", draft=False), encoding="utf-8")
     (OUT / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
