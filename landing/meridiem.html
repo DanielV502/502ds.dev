@@ -126,6 +126,9 @@ body[data-ground="night"] .facts li{background:rgba(91,211,222,.10);box-shadow:0
 .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .muted{color:var(--muted)}
 
+.phone .screen.shot{padding:0}
+.phone .screen.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.phone .screen.shot::before{z-index:1}
 /* rings */
 .rings{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
 .ring{position:relative;display:grid;place-items:center}
@@ -279,22 +282,7 @@ footer p{flex-basis:100%}
         <p>Sleep, heart rate variability and, if you use one, your PAP therapy, each against your own usual. Hold the ring and it shows what it is made of.</p>
         <ul><li>Your moments on the sun's arc, from yesterday to now</li><li>Four night signals beside your usual</li></ul>
       </div>
-      <div class="phone reveal" aria-hidden="true">
-        <div class="screen">
-          <svg class="dome" viewBox="0 0 260 70" preserveAspectRatio="none"><path d="M8 66 Q130 -40 252 66" fill="none" stroke="var(--line)" stroke-width="2"/><circle cx="150" cy="16" r="6" fill="var(--sun)"/><g fill="var(--accent)"><rect x="52" y="34" width="2" height="9" rx="1"/><rect x="84" y="19" width="2" height="9" rx="1"/><rect x="196" y="24" width="2" height="9" rx="1"/></g></svg>
-          <p class="greet">Good morning<small>Your day: sleep, variability and therapy</small></p>
-          <div class="rings">
-            <div class="ring side"><svg width="62" height="62"><circle cx="31" cy="31" r="26" fill="none" stroke="var(--soft)" stroke-width="6"/><circle class="arcfill" cx="31" cy="31" r="26" fill="none" stroke="var(--turq)" stroke-width="6" stroke-linecap="round" style="--len:163.4;--v:.91"/></svg><span class="num">91</span></div>
-            <div class="ring"><svg width="140" height="140"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--blue)"/><stop offset=".55" stop-color="var(--turq)"/><stop offset="1" stop-color="var(--accent)"/></linearGradient></defs><circle cx="70" cy="70" r="62" fill="none" stroke="var(--soft)" stroke-width="10"/><circle class="arcfill" cx="70" cy="70" r="62" fill="none" stroke="url(#g1)" stroke-width="10" stroke-linecap="round" style="--len:389.6;--v:.84"/><circle cx="70" cy="70" r="47" fill="none" stroke="var(--soft)" stroke-width="5"/><circle class="arcfill" cx="70" cy="70" r="47" fill="none" stroke="var(--blue)" stroke-width="5" stroke-linecap="round" style="--len:295.3;--v:.78"/><circle cx="70" cy="70" r="38" fill="none" stroke="var(--soft)" stroke-width="5"/><circle class="arcfill" cx="70" cy="70" r="38" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" style="--len:238.8;--v:.88"/></svg><span class="num">84</span></div>
-            <div class="ring side"><svg width="62" height="62"><circle cx="31" cy="31" r="26" fill="none" stroke="var(--soft)" stroke-width="6"/><circle class="arcfill" cx="31" cy="31" r="26" fill="none" stroke="var(--blue)" stroke-width="6" stroke-linecap="round" style="--len:163.4;--v:.78"/></svg><span class="num">78</span></div>
-          </div>
-          <div class="s-card">
-            <p class="s-title">From yesterday to this morning</p>
-            <div class="moment"><i class="dot"></i><span>Out of bed</span><span class="when">6:12<small>Wed, Nov 26</small></span></div>
-            <div class="moment"><i class="dot"></i><span>Into bed</span><span class="when">22:40<small>Tue, Nov 25</small></span></div>
-          </div>
-        </div>
-      </div>
+      <div class="phone reveal"><div class="screen shot"><img src="img/today.jpg" alt="Today in Meridiem: last night's therapy, sleep and heart rate variability in one ring, with the moments on the sun's arc" loading="lazy"></div></div>
     </div>
   </section>
 
@@ -306,23 +294,7 @@ footer p{flex-basis:100%}
         <p>Duration, efficiency, restorative sleep, regularity and interruptions, each read against your own history and the published ranges for your age.</p>
         <ul><li>A sleep diary that fills itself with what your watch measured</li><li>A report you can take to your doctor</li></ul>
       </div>
-      <div class="phone reveal" aria-hidden="true">
-        <div class="screen">
-          <p class="s-title">Last night · 7h 12m asleep</p>
-          <div class="s-card">
-            <div class="hyp" id="hyp"></div>
-            <div class="row muted"><span>22:48</span><span>Awake · REM · Core · Deep</span><span>6:10</span></div>
-          </div>
-          <div class="s-card parts">
-            <div class="part"><span>Duration</span><b style="--w:82%"></b><span>82</span></div>
-            <div class="part"><span>Efficiency</span><b style="--w:91%"></b><span>91</span></div>
-            <div class="part"><span>Restorative</span><b style="--w:74%"></b><span>74</span></div>
-            <div class="part"><span>Regularity</span><b style="--w:88%"></b><span>88</span></div>
-            <div class="part"><span>Interruptions</span><b style="--w:69%"></b><span>69</span></div>
-          </div>
-          <div class="s-card"><div class="row"><span>Sleep score</span><b style="font-size:20px">81</b></div><span class="muted">Against your last 30 nights</span></div>
-        </div>
-      </div>
+      <div class="phone reveal"><div class="screen shot"><img src="img/sleep.jpg" alt="Sleep in Meridiem: Alar-ME, the night's score and its five parts" loading="lazy"></div></div>
     </div>
   </section>
 
@@ -359,13 +331,7 @@ footer p{flex-basis:100%}
           <p class="level"><b>Level 4</b><span>Your watch guides you, the phone records</span></p>
         </div>
       </div>
-      <div class="phone reveal" aria-hidden="true">
-        <div class="screen">
-          <p class="s-title">Coherent · 5 min</p>
-          <div class="breath"><div class="disc">Breathe<span>6 a minute</span></div></div>
-          <div class="s-card"><div class="row"><span>Heart rate</span><b>64 → 58</b></div><div class="row"><span>Variability</span><b>+18 ms</b></div></div>
-        </div>
-      </div>
+      <div class="phone reveal"><div class="screen shot"><img src="img/practice.jpg" alt="Practice in Meridiem: begin a guided breathing session" loading="lazy"></div></div>
     </div>
   </section>
 
@@ -377,19 +343,7 @@ footer p{flex-basis:100%}
         <p>One night of heart rate variability moves on its own. Meridiem reads it over three, five and seven nights against your own band, and says which way it is going.</p>
         <ul><li>Your routine against your nights: screens, caffeine, alcohol</li><li>Move: steps and workouts, against your usual</li></ul>
       </div>
-      <div class="phone reveal" aria-hidden="true">
-        <div class="screen">
-          <p class="s-title">HRV · two readings</p>
-          <div class="steps"><div class="step"><b>3</b>Trend</div><div class="step"><b>5</b>Estimate</div><div class="step"><b>7</b>Confirmed</div></div>
-          <div class="s-card"><div class="row"><span>Your band</span><b>38–52 ms</b></div><div class="row"><span>Last 7 nights</span><b>47 ms</b></div><span class="muted">Within your usual</span></div>
-          <div class="s-card">
-            <p class="s-title">Your routine</p>
-            <div class="moment"><i class="dot"></i><span>Screens off</span><span class="when">22:05<small>Tue, Nov 25</small></span></div>
-            <div class="moment"><i class="dot"></i><span>Last caffeine</span><span class="when">13:30<small>Tue, Nov 25</small></span></div>
-            <div class="moment"><i class="dot"></i><span>Practice · 5 min</span><span class="when">21:40<small>Tue, Nov 25</small></span></div>
-          </div>
-        </div>
-      </div>
+      <div class="phone reveal"><div class="screen shot"><img src="img/recovery.jpg" alt="Recovery in Meridiem: heart rate variability against your own usual" loading="lazy"></div></div>
     </div>
   </section>
 
@@ -468,7 +422,7 @@ footer p{flex-basis:100%}
   <div class="wrap">
     <a href="/">502 Design Studio</a><a href="support/">Support</a><a href="privacy/">Privacy Policy</a><a href="terms/">Terms of Use</a>
     <span>info@502ds.dev</span>
-    <p>© 2025–2026 502 Design Studio. Meridiem is for general wellness; it does not diagnose, treat or prevent any condition.</p>
+    <p>The screens show Meridiem's sample data. © 2025–2026 502 Design Studio. Meridiem is for general wellness; it does not diagnose, treat or prevent any condition.</p>
   </div>
 </footer>
 
@@ -476,7 +430,7 @@ footer p{flex-basis:100%}
 (() => {
   // The stepped night: Awake, REM, Core, Deep as heights, one bar per 10 minutes.
   const stages = "1122334443322221223344332222112233332222221122211".slice(0, 48);
-  const hyp = document.getElementById("hyp");
+  const hyp = document.getElementById("hyp") || document.createElement("div");
   const h = { "1": 92, "2": 60, "3": 38, "4": 18 };
   for (const s of stages) {
     const i = document.createElement("i");
